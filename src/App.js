@@ -16,7 +16,7 @@ class App extends Component {
     p.draw = () => {
       p.background(200, 200);
       p.circle(100, 200, 100);
-      p.rect(300, 150, 100, 100);
+      p.rect(250, 150, 100, 100);
     }
   }
 

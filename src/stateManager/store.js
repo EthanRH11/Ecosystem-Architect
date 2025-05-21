@@ -1,6 +1,10 @@
-import { configureStore } from "redux";
-import reducer from "./reducer";
+import { configureStore } from '@reduxjs/toolkit';
+import animalSlice from './slices/animalSlices'
 
-const store = configureStore(reducer);
+const store = configureStore({
+    reducer: {
+        animals: animalSlice,
+    }
+});
 
 export default store;

@@ -1,6 +1,5 @@
 import Species from "./Species";
 
-
 class Bear extends Species {
     constructor({
         id = "000001",

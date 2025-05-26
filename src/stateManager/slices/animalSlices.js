@@ -22,10 +22,10 @@ const animalSlice = createSlice({
         },
 
         removeDeer: (state, action) => {
-            state.deers = state.deers.filter(bear => bear.id !== action.payload);
+            state.deers = state.deers.filter(bear => deer.id !== action.payload);
         }
     }
 });
 
 export const {addBear, addDeer, removeBear, removeDeer} = animalSlice.actions
-export default animalSlice
+export default animalSlice.reducer

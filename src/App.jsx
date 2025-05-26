@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import p5 from 'p5';
 import './App.css';
+import drawAnimal from './drawFunctions/animals';
 
 class App extends Component {
   constructor() {
@@ -11,6 +12,7 @@ class App extends Component {
   Sketch = (p) => {
     p.setup = () => {
       p.createCanvas(400, 400);
+      drawAnimal();
     }
 
     p.draw = () => {

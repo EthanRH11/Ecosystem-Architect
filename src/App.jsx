@@ -1,6 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import p5 from 'p5';
 import './App.css';
+import drawAnimal from './drawFunctions/animals';
 
 class App extends Component {
   constructor() {
@@ -9,14 +10,24 @@ class App extends Component {
   }
 
   Sketch = (p) => {
-    p.setup = () => {
-      p.createCanvas(400, 400);
+    let img = null
+
+    p.setup = async () => {
+      p.createCanvas(p.windowWidth, p.windowHeight);
+
+      try {
+        img = await p.loadImage('/assets/animals/bear.png');
+      } catch (err) {
+        console.error("Can't find image");
+      }
     }
 
     p.draw = () => {
       p.background(200, 200);
-      p.circle(100, 200, 100);
-      p.rect(250, 150, 100, 100);
+
+      if (img) {
+        drawAnimal(p, img);
+      }
     }
   }
 
@@ -34,7 +45,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="App" ref={this.myRef}>
       </div>
     );
   }

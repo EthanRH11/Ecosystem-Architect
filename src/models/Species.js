@@ -1,5 +1,3 @@
-
-
 class Species {
     constructor({
         id = Math.random().toString(36).substring(2, 9),
@@ -25,7 +23,6 @@ class Species {
         this.dietType = dietType;
         this.predators = [];
         this.prey = [];
-
 
         this.energyValue = energyValue;
         this.energyNeeds = energyNeeds;
@@ -128,7 +125,181 @@ class Species {
 
 }
 
+export class Bear extends Species {
+    constructor({
+        id = "000001",
+        name = "Bear",
+        population = 100,
+        birthRate = 0.5,
+        deathRate = 0.01,
+        dietType = "carnivore",
+        energyValue = 15,
+        energyNeeds = 20,
+        movementSpeed = 4,
+        size = 10,
+        color = "#8B4513"
+    } = {}) {
+        super({
+            id,
+            name,
+            population,
+            birthRate,
+            deathRate,
+            dietType,
+            energyValue,
+            energyNeeds,
+            movementSpeed,
+            size,
+            color
+        });
 
+        this.predators = ['wolves'];
+        this.prey = ['deer', 'rabbits', 'squirrels'];
+        this.temperatureRange = {
+            min: -30,
+            max: 30,
+            optimal: 10
+        };
+        this.hibernation = {
+            start: "November",
+            end: "March",
+            duration: 4 // months
+        };
+        this.hibernationActive = false;
+    }
 
-export { Species };
-export default Species;
+    toObject() {
+        return {
+            id: this.id,
+            name: this.name,
+            population: this.population,
+            birthRate: this.birthRate,
+            deathRate: this.deathRate,
+            dietType: this.dietType,
+            energyValue: this.energyValue,
+            energyNeeds: this.energyNeeds,
+            movementSpeed: this.movementSpeed,
+            size: this.size,
+            color: this.color,
+            predators: this.predators,
+            prey: this.prey,
+            temperatureRange: this.temperatureRange,
+            hibernation: this.hibernation,
+            hibernationActive: this.hibernationActive
+        }
+    }
+};
+
+export class Deer extends Species {
+    constructor({
+        id = "001002",
+        name = "Deer",
+        population = 100,
+        birthRate = 0.5,
+        deathRate = 0.1,
+        dietType = "herbivore",
+        energyValue = 5,
+        energyNeeds = 8,
+        movementSpeed = 3,
+        size = 2,
+        color = "#8B4514"
+    } = {}) {
+        super({
+            id,
+            name,
+            population,
+            birthRate,
+            deathRate,
+            dietType,
+            energyValue,
+            energyNeeds,
+            movementSpeed,
+            size,
+            color
+        });
+
+        this.predators = ['wolves', 'bears'];
+        this.prey = [];
+        this.temperatureRange = {
+            min: -20,
+            max: 30,
+            optimal: 15
+        };
+    }
+
+    toObject() {
+        return {
+            id: this.id,
+            name: this.name,
+            population: this.population,
+            birthRate: this.birthRate,
+            deathRate: this.deathRate,
+            dietType: this.dietType,
+            energyValue: this.energyValue,
+            energyNeeds: this.energyNeeds,
+            movementSpeed: this.movementSpeed,
+            size: this.size,
+            color: this.color,
+            predators: this.predators,
+            prey: this.prey,
+            temperatureRange: this.temperatureRange
+        }
+    }
+}
+
+export class Rabbit extends Species {
+    constructor({
+        id = "001001",
+        name = "Rabbit",
+        population = 100,
+        birthRate = 0.7,
+        deathRate = 0.15,
+        dietType = "herbivore",
+        energyValue = 3,
+        energyNeeds = 6,
+        movementSpeed = 4,
+        size = 1,
+        color = "#A52A2A"
+    } = {}) {
+        super({
+            id,
+            name,
+            population,
+            birthRate,
+            deathRate,
+            dietType,
+            energyValue,
+            energyNeeds,
+            movementSpeed,
+            size,
+            color
+        });
+
+        this.predators = ['foxes', 'hawks', 'snakes'];
+        this.prey = [];
+        this.temperatureRange = {
+            min: -20,
+            max: 30,
+            optimal: 15
+        };
+    }
+
+    toObject() {
+        return {
+            id: this.id,
+            name: this.name,
+            population: this.population,
+            birthRate: this.birthRate,
+            deathRate: this.deathRate,
+            dietType: this.dietType,
+            energyValue: this.energyValue,
+            energyNeeds: this.energyNeeds,
+            movementSpeed: this.movementSpeed,
+            size: this.size,
+            color: this.color,
+            predators: this.predators,
+            prey: this.prey,
+            temperatureRange: this.temperatureRange
+        }
+    }
+}

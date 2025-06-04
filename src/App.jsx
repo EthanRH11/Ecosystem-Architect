@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import p5 from 'p5';
 import './App.css';
-import {setUpAnimal, drawAnimal} from './drawFunctions/animals';
+import {setUpAnimal, drawAnimal, updateAnimal} from './drawFunctions/animals';
 
 class App extends Component {
   constructor() {
@@ -28,6 +28,7 @@ class App extends Component {
 
       if (img) {
         drawAnimal(p, img);
+        updateAnimal(p, img);
       }
     }
   }

@@ -2,24 +2,27 @@ import store from "../stateManager/store";
 import { Bear, Deer, Rabbit } from "../models/Species";
 import { addBear, addDeer, removeBear, removeDeer } from "../stateManager/slices/animalSlices";
 
-function drawAnimal(p, img) {
+export function setUpAnimal() {
+    const animals = store.getState().animals;
+
+    if (animals.bears.length === 0) {
+        store.dispatch(addBear(new Bear({population: 3, x: 0, y: 100}).toObject()));
+        store.dispatch(addBear(new Bear({population: 6, x: 150, y: 100}).toObject()));
+        store.dispatch(addBear(new Bear({population: 10, x: 300, y: 100}).toObject()));
+    }
+}
+
+export function drawAnimal(p, img) {
     if (!img) return;
 
     const animals = store.getState().animals;
 
-    if (animals.bears.length === 0) {
-        store.dispatch(addBear(new Bear().toObject()));
-        store.dispatch(addBear(new Bear().toObject()));
-        store.dispatch(addBear(new Bear().toObject()));
-    }
-
-    let x = 0;
-    let y = 100;
-
-    animals.bears.forEach(element => {
-        p.image(img, x, y);
-        x += 150;
+    animals.bears.forEach(bear => {
+        p.image(img, bear.x, bear.y, img.width * (bear.population / 10), img.height * (bear.population / 10));
     });
 }
 
-export default drawAnimal;
+// TODO: implement movement.
+export function updateAnimal() {
+
+}

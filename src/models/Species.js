@@ -2,7 +2,7 @@ class Species {
     constructor({
         id = Math.random().toString(36).substring(2, 9),
         name = 'Unnamed Species',
-        population = 100,
+        population = 10,
         birthRate = 0.1,
         deathRate = 0.05,
         dietType = 'herbivore', //Options: 'producer', 'herbivore', 'carnivore'
@@ -10,7 +10,10 @@ class Species {
         energyNeeds = 5, //How much energy it needs to survive
         movementSpeed = 1, //how fast it moves in the enviorment
         size = 1,   //relative size
-        color = '#' + Math.floor(Math.random() * 16777215).toString(16)
+        color = '#' + Math.floor(Math.random() * 16777215).toString(16),
+        // initial position
+        x = 0,
+        y = 0,
     } = {}) {
         this.id = id;
         this.name = name;
@@ -36,6 +39,9 @@ class Species {
             max: 40,
             optimal: 25
         };
+
+        this.x = x;
+        this.y = y;
     }
 
     //Method to calculate effects of being hunted
@@ -129,7 +135,7 @@ export class Bear extends Species {
     constructor({
         id = "000001",
         name = "Bear",
-        population = 100,
+        population = 10,
         birthRate = 0.5,
         deathRate = 0.01,
         dietType = "carnivore",
@@ -137,7 +143,9 @@ export class Bear extends Species {
         energyNeeds = 20,
         movementSpeed = 4,
         size = 10,
-        color = "#8B4513"
+        color = "#8B4513",
+        x = 0,
+        y = 0,
     } = {}) {
         super({
             id,
@@ -150,7 +158,9 @@ export class Bear extends Species {
             energyNeeds,
             movementSpeed,
             size,
-            color
+            color,
+            x,
+            y
         });
 
         this.predators = ['wolves'];
@@ -185,7 +195,9 @@ export class Bear extends Species {
             prey: this.prey,
             temperatureRange: this.temperatureRange,
             hibernation: this.hibernation,
-            hibernationActive: this.hibernationActive
+            hibernationActive: this.hibernationActive,
+            x: this.x,
+            y: this.y
         }
     }
 };
@@ -194,7 +206,7 @@ export class Deer extends Species {
     constructor({
         id = "001002",
         name = "Deer",
-        population = 100,
+        population = 10,
         birthRate = 0.5,
         deathRate = 0.1,
         dietType = "herbivore",
@@ -202,7 +214,9 @@ export class Deer extends Species {
         energyNeeds = 8,
         movementSpeed = 3,
         size = 2,
-        color = "#8B4514"
+        color = "#8B4514",
+        x = 0,
+        y = 0,
     } = {}) {
         super({
             id,
@@ -215,7 +229,9 @@ export class Deer extends Species {
             energyNeeds,
             movementSpeed,
             size,
-            color
+            color,
+            x,
+            y
         });
 
         this.predators = ['wolves', 'bears'];
@@ -242,7 +258,9 @@ export class Deer extends Species {
             color: this.color,
             predators: this.predators,
             prey: this.prey,
-            temperatureRange: this.temperatureRange
+            temperatureRange: this.temperatureRange,
+            x: this.x,
+            y: this.y
         }
     }
 }
@@ -251,7 +269,7 @@ export class Rabbit extends Species {
     constructor({
         id = "001001",
         name = "Rabbit",
-        population = 100,
+        population = 10,
         birthRate = 0.7,
         deathRate = 0.15,
         dietType = "herbivore",
@@ -259,7 +277,9 @@ export class Rabbit extends Species {
         energyNeeds = 6,
         movementSpeed = 4,
         size = 1,
-        color = "#A52A2A"
+        color = "#A52A2A",
+        x = 0,
+        y = 0
     } = {}) {
         super({
             id,
@@ -272,7 +292,9 @@ export class Rabbit extends Species {
             energyNeeds,
             movementSpeed,
             size,
-            color
+            color,
+            x,
+            y
         });
 
         this.predators = ['foxes', 'hawks', 'snakes'];
@@ -299,7 +321,9 @@ export class Rabbit extends Species {
             color: this.color,
             predators: this.predators,
             prey: this.prey,
-            temperatureRange: this.temperatureRange
+            temperatureRange: this.temperatureRange,
+            x: this.x,
+            y: this.y
         }
     }
 }

@@ -13,47 +13,54 @@ class Species {
         // energyNeeds = 5, //How much energy it needs to survive
         // velocity = new Vector(1, 0), //how fast it moves in the enviorment
         // size = 1,   //relative size
-        // color = '#' + Math.floor(Math.random() * 16777215).toString(16),
         // // initial position
         // position = new Vector(0, 0)
 
         this.id = obj.id || Math.random().toString(36).substring(2, 9);
         this.name = obj.name || 'Unnamed Species';
 
-        this.population = obj.population || 10;
-        this.birthRate = obj.birthRate || 0.1;
-        this.deathRate = obj.deathRate || 0.05;
+        this.population = obj.population ?? 10;
+        this.birthRate = obj.birthRate ?? 0.1;
+        this.deathRate = obj.deathRate ?? 0.05;
         this.populationHistory = obj.populationHistory || [this.population];
 
         this.dietType = obj.dietType || 'herbivore', //Options: 'producer', 'herbivore', 'carnivore';
-        this.predators = obj.predators || [];
+            this.predators = obj.predators || [];
         this.prey = obj.prey || [];
 
-        this.energyValue = obj.energyValue;
-        this.energyNeeds = obj.energyNeeds;
-        this.velocity = obj.velocity;
-        this.size = obj.size;
+        this.energyValue = obj.energyValue ?? 10; //How much energy it provides when eaten
+        this.energyNeeds = obj.energyNeeds ?? 5; //How much energy it needs to survive
 
-        this.color = obj.color;
+        //how fast it moves in the enviorment
+        this.velocity = obj.velocity instanceof Vector ? obj.velocity : new Vector(obj.velocity?.x ?? 1, obj.velocity?.y ?? 0);
+        this.size = obj.size ?? 1; // relative size
 
-        this.temperatureRange = this.temperatureRange || 
+        this.temperatureRange = obj.temperatureRange ||
         {
             min: 0,
             max: 40,
             optimal: 25
         };
 
-        this.position = obj.position;
+        this.position = obj.position instanceof Vector ? obj.position : new Vector(obj.position?.x ?? 0, obj.position?.y ?? 0);;
     }
 
-    constructor(objInstance) {
-    }
+    updatePosition(windowWidth, windowHeight, imageWidth, imageHeight) {
+        const nextX = this.position.x + this.velocity.x;
+        const nextY = this.position.y + this.velocity.y;
+        const scaledWidth = imageWidth * (this.population / 10);
+        const scaledHeight = imageHeight * (this.population / 10);
 
-    updatePosition(windowWidth, windowHeight) {
+        if (nextX + scaledWidth > windowWidth || nextX - scaledWidth < 0) {
+            this.velocity.flipX();
+        }
+        if (nextY + scaledHeight > windowHeight || nextY - scaledHeight < 0) {
+            this.velocity.flipY();
+        }
+
         this.position.add(this.velocity);
-        if (this.position.x > windowWidth || this.position.x < 0) this.velocity.flipX();
-        if (this.position.y > windowHeight || this.position.y < 0) this.velocity.flipY();
     }
+
 
     // //Method to calculate effects of being hunted
     // calculatePredation(allSpecies, timeStep) {
@@ -140,7 +147,7 @@ class Species {
     //     return this.population;
     // }
 
-        toObject() {
+    toObject() {
         return {
             id: this.id,
             name: this.name,
@@ -175,8 +182,7 @@ export class Bear extends Species {
         energyNeeds = 20,
         velocity = new Vector(1, 0),
         size = 10,
-        color = "#8B4513",
-        position
+        position = new Vector(0, 0)
     } = {}) {
         super({
             id,
@@ -189,7 +195,6 @@ export class Bear extends Species {
             energyNeeds,
             velocity,
             size,
-            color,
             position
         });
 
@@ -221,7 +226,6 @@ export class Deer extends Species {
         energyNeeds = 8,
         velocity = new Vector(3, 0),
         size = 2,
-        color = "#8B4514",
         position = new Vector(0, 0)
     } = {}) {
         super({
@@ -235,7 +239,6 @@ export class Deer extends Species {
             energyNeeds,
             velocity,
             size,
-            color,
             position
         });
 
@@ -261,7 +264,6 @@ export class Rabbit extends Species {
         energyNeeds = 6,
         velocity = new Vector(4, 0),
         size = 1,
-        color = "#A52A2A",
         position
     } = {}) {
         super({
@@ -275,7 +277,6 @@ export class Rabbit extends Species {
             energyNeeds,
             velocity,
             size,
-            color,
             position
         });
 

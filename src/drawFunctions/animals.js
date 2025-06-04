@@ -9,8 +9,8 @@ export function setUpAnimal() {
 
     if (animals.bears.length === 0) {
         store.dispatch(addBear(new Bear({ population: 3, position: new Vector(0, 100) }).toObject()));
-        store.dispatch(addBear(new Bear({ population: 6, position: new Vector(150, 100)  }).toObject()));
-        store.dispatch(addBear(new Bear({ population: 10, position: new Vector(300, 100)  }).toObject()));
+        store.dispatch(addBear(new Bear({ population: 6, position: new Vector(150, 100)}).toObject()));
+        store.dispatch(addBear(new Bear({ population: 10, position: new Vector(300, 100)}).toObject()));
     }
 }
 
@@ -27,15 +27,16 @@ export function drawAnimal(p, img) {
 }
 
 // update the state of all animals. Called every frame in draw()
-export function updateAnimal(p) {
+export function updateAnimal(p, img) {
     const bears = store.getState().animals.bears;
 
     // Rehydrate all objects in the store, and call updatePosition() method.
     const newBears = bears.map(bearObj => {
         const newBear = new Bear(bearObj);
-        newBear.updatePosition(p.windowWidth, p.windowHeight);
+        newBear.updatePosition(p.windowWidth, p.windowHeight, img.width, img.height);
         return newBear.toObject();
     });
+    console.log(newBears);
 
     store.dispatch(updateBear(newBears));
 }

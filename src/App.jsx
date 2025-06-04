@@ -28,8 +28,8 @@ class App extends Component {
 
       if (img) {
         drawAnimal(p, img);
+        updateAnimal(p, img);
       }
-      updateAnimal(p);
     }
   }
 

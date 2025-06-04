@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import p5 from 'p5';
 import './App.css';
-import drawAnimal from './drawFunctions/animals';
+import {setUpAnimal, drawAnimal} from './drawFunctions/animals';
 
 class App extends Component {
   constructor() {
@@ -14,6 +14,7 @@ class App extends Component {
 
     p.setup = async () => {
       p.createCanvas(p.windowWidth, p.windowHeight);
+      setUpAnimal();
 
       try {
         img = await p.loadImage('/assets/animals/bear.png');

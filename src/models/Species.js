@@ -51,10 +51,10 @@ class Species {
         const scaledWidth = imageWidth * (this.population / 10);
         const scaledHeight = imageHeight * (this.population / 10);
 
-        if (nextX + scaledWidth > windowWidth || nextX - scaledWidth < 0) {
+        if (nextX + scaledWidth > windowWidth || nextX < 0) {
             this.velocity.flipX();
         }
-        if (nextY + scaledHeight > windowHeight || nextY - scaledHeight < 0) {
+        if (nextY + scaledHeight > windowHeight || nextY  < 0) {
             this.velocity.flipY();
         }
 
